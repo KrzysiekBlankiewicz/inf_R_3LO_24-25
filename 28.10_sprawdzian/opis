@@ -1,0 +1,9 @@
+ZADANIE 1: 
+
+Proszę o napisanie programu, który umożliwi grę w kółko i krzyżyk z wykorzystaniem konsoli i pyGame. Niech polecenia (na którym polu gracz postawi swój znak) będą wprowadzane w konsoli, a przebieg gry niech będzie wyświetlany na ekranie za pomocą pyGame. 
+
+
+ZADANIE 2: 
+
+Proszę o stworzenie i narysowanie w pyGame planszy z NxN kwadratowych pól. Na jednym polu niech zostanie wyświetlone kółko w dowolnym kolorze oznaczające pionka. 
+Wprowadzanie w konsoli liter W/A/S/D niech porusza pionkiem w odpowiednich kierunkach. 
