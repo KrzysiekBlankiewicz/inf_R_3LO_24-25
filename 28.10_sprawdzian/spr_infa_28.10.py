@@ -1,3 +1,4 @@
+#By Jozek
 import pygame
 from pygame import Color
 
