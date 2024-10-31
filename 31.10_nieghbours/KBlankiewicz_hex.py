@@ -29,11 +29,11 @@ def vertices(position, a):
 
 
 class Hex:
-    neighbours = []
     def __init__(self, q, r, s):
         self.q = q
         self.r = r
         self.s = s
+        self.neighbours = []
         
     def addNeighbour(self, otherHex):
         if otherHex not in self.neighbours:
@@ -52,17 +52,16 @@ class Hex:
     
     def isNeighbour(self, otherHex):
         if self.q == otherHex.q and abs(self.r - otherHex.r) == 1 and abs(self.s - otherHex.s) == 1:
-            return True
-        elif self.r == otherHex.r and abs(self.q - otherHex.q) == 1 and abs(self.s - otherHex.s) == 1:
-            return True
-        elif self.s == otherHex.s and abs(self.r - otherHex.r) == 1 and abs(self.q - otherHex.q) == 1:
-            return True
-        else:
-            return False
+            return 1
+        if self.r == otherHex.r and abs(self.q - otherHex.q) == 1 and abs(self.s - otherHex.s) == 1:
+            return 1
+        if self.s == otherHex.s and abs(self.r - otherHex.r) == 1 and abs(self.q - otherHex.q) == 1:
+            return 1
+        return 0
 
 def setNeighbourgood(hexes):
     for a in hexes:
         for b in hexes:
-            if a.isNeighbour(b):
+            if a.isNeighbour(b) == 1:
                 a.addNeighbour(b)
                 b.addNeighbour(a)
