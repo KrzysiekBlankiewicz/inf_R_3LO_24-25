@@ -1,36 +1,45 @@
 import math
 import pygame
 
-def hexagon(q, r, s, a, offset):
-    a = a + offset / math.sqrt(3)
-    xcord = (a * 1 / 2) * q + a * q
-    ycord = s * (math.sqrt(3) * a) / 2 - r * (math.sqrt(3) * a) / 2
-    return xcord, ycord
+color = (150, 0,200)
 
-def topleftPosition(x, y):
-    xpos = x + sizeX / 2
-    ypos = y + sizeY / 2
-    return xpos, ypos
+def position(q, r, s, a):
+    if q + r + s != 0:
+        return False
+    xPos = q * (1.5 * a)
+    yPos = (s - r) * (a * math.sqrt(3) )/2
 
-def vertices(x, y):
-    v1 = [x - (a / 2), y + (a * math.sqrt(3) / 2)]
-    v2 = [x + (a / 2), y + (a * math.sqrt(3) / 2)]
-    v3 = [x + a, y]
-    v4 = [x + (a / 2), y - (a * math.sqrt(3) / 2)]
-    v5 = [x - (a / 2), y - (a * math.sqrt(3) / 2)]
-    v6 = [x - a, y]
-    return v1, v2, v3, v4, v5, v6
+    return (xPos, yPos)
+
+def topLeftPosition(hexPosFromCenter, screenCenter):
+    xPos = hexPosFromCenter[0] + screenCenter[0]
+    yPos = hexPosFromCenter[1] + screenCenter[1]
+    return (xPos, yPos)
+
+def vertices(position, a):
+    x = position[0]
+    y = position[1]
+    v1 = (x - a/2, y + (a * math.sqrt(3))/2 )
+    v2 = (x + a/2, y + (a * math.sqrt(3))/2 )
+    v3 = (x + a, y)
+    v4 = (x + a/2, y - (a * math.sqrt(3))/2 )
+    v5 = (x - a/2, y - (a * math.sqrt(3))/2 )
+    v6 = (x - a, y)
+    return [v1, v2, v3, v4, v5, v6]
+
 
 class Hex:
     neighbours = []
-    def __init__(self,q,r,s) :
+    def __init__(self, q, r, s):
         self.q = q
         self.r = r
         self.s = s
-    def addSomsiad(self,otherhex):
-        self.neighbours.append(otherhex)
-    def draw(self,a,A,sizeX,sizeY,screen):
-            hexcenter = hexagon(self.q,-self.q-self.s,self.s,A)
-            toplefeftpos = topleftPosition(hexcenter[0],hexcenter[1],sizeX,sizeY)
-            verticesList = vertices(toplefeftpos[0],toplefeftpos[1],a)
-            pygame.draw.polygon(screen,(255,0,0),verticesList)
+        
+    def addNeighbour(self, otherHex):
+        self.neighbours.append(otherHex)
+
+    def draw(self, a, a_prime, middle, screen):
+        hexFromCenterPosition = position(self.q, self.r, self.s, a_prime)
+        properPosition = topLeftPosition(hexFromCenterPosition, middle)
+        verticesList = vertices(properPosition, a)
+        pygame.draw.polygon(screen, color, verticesList)
