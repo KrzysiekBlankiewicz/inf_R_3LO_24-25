@@ -5,6 +5,7 @@ import pionek
 
 pygame.init()
  
+
 a = 30
 offset = 5
 A = a + offset / math.sqrt(3)
@@ -13,20 +14,20 @@ screenX = 500
 radius = 3
 middle = (screenX/2, screenY/2)
 screen = pygame.display.set_mode([screenX, screenY])
-playerRadius = 20
+pionekrozmiar = 20
 
-hexList = []
+listahexy = []
 
 for q in range(-radius, radius + 1):
         for r in range(-radius, radius + 1):
             s = -q - r
             if abs(q) + abs(r) + abs(s) <= radius * 2:
                 hex1 = funkcjedogry.Hex(q, -q-s, s)
-                hexList.append(hex1)
+                listahexy.append(hex1)
 
-funkcjedogry.setNeighbourhood(hexList)
+funkcjedogry.setNeighbourhood(listahexy)
 
-player = pionek.pawn(hexList[0])
+player = pionek.pawn(listahexy[0])
 
  
 running = True
@@ -36,15 +37,19 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_w:
+                player.randomruch()
+            if event.key == pygame.K_a:
+                player.randomruch()
+            if event.key == pygame.K_d:
                 player.randomruch()
 
     screen.fill((255, 255, 255))
 
-    for h in hexList:
+    for h in listahexy:
         h.draw(a, A, middle, screen)
 
-    player.draw(A, middle, screen, playerRadius)
+    player.draw(A, middle, screen, pionekrozmiar)
     
     pygame.display.flip()
     
