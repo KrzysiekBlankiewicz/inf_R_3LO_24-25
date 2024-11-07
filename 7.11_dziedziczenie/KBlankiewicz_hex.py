@@ -64,6 +64,7 @@ class Hex:
             return True
         else:
             return False
+        
     def addPawn(self, pawn):
         if self.occupied == False:
             self.occupied = True

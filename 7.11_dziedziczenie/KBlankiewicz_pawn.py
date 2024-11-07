@@ -19,29 +19,27 @@ class Pawn:
             
     def draw(self, a_prime, middle, screen, r):
         position = self.hex.pawnPosition(a_prime, middle)
-        if self.dead:
+        if self.dead == True:
             pygame.draw.circle(screen, white, position, r)
         else:
             pygame.draw.circle(screen, blue, position, r)
 
     def move_management(self, key):
-        if self.dead:
+        if self.dead == True:
             return
-        if key == self.move_key:
-            destination = random.choice(self.hex.neighbours)
-            self.move(destination)
-            
-    def action_management(self, key):
-        pass
+        else:
+            if key == self.move_key:
+                destination = random.choice(self.hex.neighbours)
+                self.move(destination)
+        
     
 class Warrior(Pawn):
     def action_management(self, key):
         if key == self.action_key:
             for n in self.hex.neighbours:
                 if n.occupied:
-                    n.pawn.dead == True
+                    n.pawn.dead = True
                     n.occupied = False
-                       
 
 
 
