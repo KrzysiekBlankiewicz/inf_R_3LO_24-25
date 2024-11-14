@@ -1,0 +1,2 @@
+Proszę o wykonanie zadań 2.1-2.4 z matury 2023.
+W pliku conv.py znajdują się podpowiedzi w formie funkcji konwertujących bin<->dec
