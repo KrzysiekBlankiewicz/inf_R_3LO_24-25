@@ -48,9 +48,8 @@ while running:
     P4.draw(screen,10)
 
     rakietka.draw(screen,10)
+
     pygame.display.flip()
- 
-pygame.quit()
 
 def distance (xR,yR,xP,yP):
     return ((xR-xP)**2 + (yR-yP)**2)**(1/2)
@@ -59,7 +58,13 @@ def gravity (mR , mP ,xR ,yR ,xP,yP):
     G=10
     r=distance(xR,yR,xP,yP)
     Fg=G*(mR*mP)/(r**2)
-
-
-
+    return Fg
+ 
+listaP=[P1,P2,P3,P4]
 listaF=[]
+
+for i in  listaP:
+    F=gravity(mR , mP ,xR ,yR ,xP,yP)
+    listaF.append(F)
+
+pygame.quit()
