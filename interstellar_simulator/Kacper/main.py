@@ -6,15 +6,12 @@ from planet import Planet
 sizeX =1000
 sizeY = 1000
 
-
 planet_number = 4
 planet_size = 30
 planet_list=[]
 
 screen = pygame.display.set_mode([sizeX, sizeY])
 pygame.init()
-
-    
 
 def distance(x1,y1,x2,y2):
     return math.sqrt((x1-y1)**2 + (x2-y2)**2)
