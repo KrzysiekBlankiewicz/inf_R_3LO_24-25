@@ -22,10 +22,16 @@ def gravity(m1,m2,x1,y1,x2,y2):
     return g*m1*m2/r**2
 
 
+
+
 for x in range(planet_number):
     planet = Planet(random.randint(1,1000),random.randint(1,1000),10)
     planet_list.append(planet)
-print(planet_list)
+
+def vector(m1,m2,x1,y1,x2,y2):
+    fx = (x2-x1)*gravity(m1,m2,x1,y1,x2,y2)
+    fy = (y2-y1)*gravity(m1,m2,x1,y1,x2,y2)
+    return fx,fy
 
 running = True
 
@@ -35,11 +41,13 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     screen.fill((0, 0, 0))
-    rakieta = Rocket(100,50,100,100,100)
+    rakieta = Rocket(500,500,100,100,100)
     rakieta.draw(screen,100)
     for x in planet_list:
-        print(x,distance(x.planetx,x.planety,rakieta.rocketx,rakieta.rockety))
         x.draw(screen,planet_size)
+        print(gravity(rakieta.mass,x.mass,rakieta.rocketx,rakieta.rockety,x.planetx,x.planety))
+        pygame.draw.line(screen,(0,0,200),(rakieta.rocketx,rakieta.rockety),[vector(rakieta.mass,x.mass,rakieta.rocketx,rakieta.rockety,x.planetx,x.planety)[0],vector(rakieta.mass,x.mass,rakieta.rocketx,rakieta.rockety,x.planetx,x.planety)[1]])
     pygame.display.flip()
 
 pygame.quit()
+print("HELLLO WORLD")
