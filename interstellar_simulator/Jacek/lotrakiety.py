@@ -1,29 +1,30 @@
 import pygame
 import math
 
-file = open('rakietadane.txt').readlines()
-file = [int(line.strip()) for line in file]
+file = open('danerakieta.txt', 'r').readlines()
     
-xR = file[0]
-yR = file[1]
-vR = file[2]
-mR = file[3]
-vRangle = file[4]
-xP1 = file[5]
-yP1 = file[6]
-mP1 = file[7]
-xP2 = file[8]
-yP2 = file[9]
-mP2 = file[10]
-xP3 = file[11]
-yP3 = file[12]
-mP3 = file[13]
-xP4 = file[14]
-yP4 = file[15]
-mP4 = file[16]
+xR = int(file[0])
+yR = int(file[1])
+vR = int(file[2])
+mR = int(file[3])
+vRangle = int(file[4])
+xP1 = int(file[5])
+yP1 = int(file[6])
+mP1 = int(file[7])
+xP2 = int(file[8])
+yP2 = int(file[9])
+mP2 = int(file[10])
+xP3 = int(file[11])
+yP3 = int(file[12])
+mP3 = int(file[13])
+xP4 = int(file[14])
+yP4 = int(file[15])
+mP4 = int(file[16])
 
 sizeX =1000
 sizeY = 1000
+
+line_color=(255,0,0)
  
 pygame.init()
 screen = pygame.display.set_mode([sizeX, sizeY])
@@ -37,8 +38,13 @@ class Rakieta:
         self.angle = angle
         
     def draw(self,screen,size):
-        pygame.draw.circle(screen,(200,70,100),(self.xR,self.yR),size)
-       
+        pygame.draw.circle(screen,(0,0,255),(self.xR,self.yR),size)
+
+def gravity (mR , mP ,xR ,yR ,xP,yP):
+    G=10
+    r=distance(xR,yR,xP,yP)
+    return G*(mR*mP)/(r**2)
+
 class Planet:
     def __init__(self,xP,yP,mP) :
         self.xP = xP
@@ -46,22 +52,19 @@ class Planet:
         self.mP = mP
     def draw(self,screen,size):
         pygame.draw.circle(screen,(150,0,200),(self.xP,self.yP),size)
-
+    def drawF(self,screen):
+        pygame.draw.line(screen,line_color, (xR, yR), (self.xP, self.yP))
+        
 def distance (xR,yR,xP,yP):
     return math.sqrt((xR - xP)**2 + (yR - yP)**2)
 
-def gravity (mR , mP ,xR ,yR ,xP,yP):
-    G=10
-    r=distance(xR,yR,xP,yP)
-    return G*(mR*mP)/(r**2)
 
 rakieta = Rakieta(xR, yR, vR, mR, vRangle)
 listaP = [
     Planet(xP1, yP1, mP1),
     Planet(xP2, yP2, mP2),
     Planet(xP3, yP3, mP3),
-    Planet(xP4, yP4, mP4)
-]
+    Planet(xP4, yP4, mP4)]
 
 running = True
  
@@ -74,12 +77,14 @@ while running:
 
     for planet in listaP:
         planet.draw(screen, size=100)
+        planet.drawF(screen)
 
     rakieta.draw(screen,10)
 
     listaF=[]
     for planet in  listaP:
         F = gravity(rakieta.mR, planet.mP, rakieta.xR, rakieta.yR, planet.xP, planet.yP)
+        pygame.draw.line(screen,(0,255,0), (xR, yR), ((planet.xP*F/100+xR), (planet.yP*F/100+yR)))
         listaF.append(F)         
     pygame.display.flip()
 print(listaF)  
