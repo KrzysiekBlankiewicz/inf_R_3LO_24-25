@@ -23,8 +23,12 @@ class Planet(Object):
     def __init__(self, m, x, y, color):
         super().__init__(m, x, y, color)
 
-
     
 class Rocket(Object):
     def __init__(self, m, x, y, color):
         super().__init__(m, x, y, color)
+        self.velocity = (0, 0)
+        self.acceleration = (0, 0)
+        self.resultantForce = (0,0)
+        
+
