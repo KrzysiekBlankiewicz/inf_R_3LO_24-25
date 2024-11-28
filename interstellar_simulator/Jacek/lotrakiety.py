@@ -92,4 +92,3 @@ while running:
 print(listaF)  
 
 pygame.quit()
-
