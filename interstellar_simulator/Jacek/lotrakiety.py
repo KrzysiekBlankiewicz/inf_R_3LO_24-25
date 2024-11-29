@@ -82,13 +82,19 @@ while running:
     rakieta.draw(screen,10)
 
     listaF=[]
+    xS=xR
+    yS=yR
     for planet in  listaP:
         F = gravity(rakieta.mR, planet.mP, rakieta.xR, rakieta.yR, planet.xP, planet.yP)
         dX=(planet.xP-rakieta.xR)*F/100
         dY=(planet.yP-rakieta.yR)*F/100
         pygame.draw.line(screen,(0,255,0), (xR, yR), ((xR+dX), (yR+dY)))
-        listaF.append(F)         
+        xS+=dX
+        yS+=dY
+        listaF.append(F)
+    pygame.draw.line(screen,(255,255,255), (xR, yR), (xS,yS))
     pygame.display.flip()
 print(listaF)  
 
 pygame.quit()
+
