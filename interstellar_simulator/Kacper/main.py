@@ -8,10 +8,11 @@ sizeX, sizeY = 1000, 1000
 screen = pygame.display.set_mode([sizeX, sizeY])
 pygame.init()
 
-planet_number = 4
+planet_number = 2
 planet_size = 30
 planet_list = []
-
+wypx= 0
+wypy = 0
 def distance(x1, y1, x2, y2):
     return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
@@ -46,17 +47,17 @@ while running:
     rakieta.draw(screen, 10)
 
     for planeta in planet_list:
-        rakieta.rocketx +=1
-        rakieta.rockety +=1
-        if rakieta.rocketx >= 1000:
-            rakieta.rocketx =0
-        if rakieta.rockety >= 1000:
-            rakieta.rockety =0
         planeta.draw(screen, planet_size)
         fx, fy = vector(rakieta.mass, planeta.mass, rakieta.rocketx, rakieta.rockety, planeta.planetx, planeta.planety)
-    
-        pygame.draw.line(screen, (0, 255, 0), (rakieta.rocketx, rakieta.rockety), (rakieta.rocketx + fx, rakieta.rockety + fy), 5)
-
+        wypx += fx
+        wypy += fy
+        pygame.draw.line(screen, (0, 255, 0), (rakieta.rocketx, rakieta.rockety), (rakieta.rocketx+fx, rakieta.rockety+fy), 5)
+    print(wypx,wypy)
+    pygame.draw.line(screen, (0, 0, 200), (rakieta.rocketx, rakieta.rockety), (wypx+rakieta.rocketx, wypy+rakieta.rockety), 5)
+    wypx =0
+    wypy = 0
+    rakieta.rocketx +=1
+    rakieta.rockety+=1
     pygame.display.flip()
 
 pygame.quit()
