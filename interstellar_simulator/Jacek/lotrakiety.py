@@ -24,6 +24,8 @@ mP4 = int(file[16])
 sizeX =1000
 sizeY = 1000
 
+czas=500
+
 line_color=(255,0,0)
  
 pygame.init()
@@ -53,10 +55,10 @@ class Planet:
     def draw(self,screen,size):
         pygame.draw.circle(screen,(150,0,200),(self.xP,self.yP),size)
     def drawF(self,screen):
-        pygame.draw.line(screen,line_color, (xR, yR), (self.xP, self.yP))
+        pygame.draw.line(screen,line_color, (rakieta.xR, rakieta.yR), (self.xP, self.yP))
         
 def distance (xR,yR,xP,yP):
-    return math.sqrt((xR - xP)**2 + (yR - yP)**2)
+        return math.sqrt((xR - xP)**2 + (yR - yP)**2)
 
 
 rakieta = Rakieta(xR, yR, vR, mR, vRangle)
@@ -88,13 +90,19 @@ while running:
         F = gravity(rakieta.mR, planet.mP, rakieta.xR, rakieta.yR, planet.xP, planet.yP)
         dX=(planet.xP-rakieta.xR)*F/100
         dY=(planet.yP-rakieta.yR)*F/100
-        pygame.draw.line(screen,(0,255,0), (xR, yR), ((xR+dX), (yR+dY)))
+        pygame.draw.line(screen,(0,255,0), (rakieta.xR, rakieta.yR), ((xR+dX), (yR+dY)),3)
         xS+=dX
         yS+=dY
         listaF.append(F)
-    pygame.draw.line(screen,(255,255,255), (xR, yR), (xS,yS))
+    Fwyp=distance(rakieta.xR,rakieta.yR,xS,yS)
+    a=Fwyp/mR
+    s=a*(czas**2)/2
+    pygame.draw.line(screen,(255,255,255), (rakieta.xR, rakieta.yR), (xS,yS) ,5)
+    rakieta.xR=xS
+    rakieta.yR=yS
     pygame.display.flip()
-print(listaF)  
+    pygame.time.wait(czas)
 
+pygame.quit()
 pygame.quit()
 
