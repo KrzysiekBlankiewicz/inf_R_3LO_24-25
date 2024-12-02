@@ -1,6 +1,7 @@
 import pygame
 import math
 
+#dane
 file = open('danerakieta.txt', 'r').readlines()
     
 xR = int(file[0])
@@ -24,20 +25,21 @@ mP4 = int(file[16])
 sizeX =1000
 sizeY = 1000
 
-czas=500
+czas=5
 
 line_color=(255,0,0)
  
 pygame.init()
 screen = pygame.display.set_mode([sizeX, sizeY])
- 
+
+#funkcje
 class Rakieta:
-    def __init__(self,xR,yR,vR,mR,angle):
+    def __init__(self,xR,yR,vR,mR,aR):
         self.xR = xR
         self.yR = yR
         self.vR = vR
         self.mR = mR
-        self.angle = angle
+        self.aR = aR
         
     def draw(self,screen,size):
         pygame.draw.circle(screen,(0,0,255),(self.xR,self.yR),size)
@@ -84,25 +86,32 @@ while running:
     rakieta.draw(screen,10)
 
     listaF=[]
-    xS=xR
-    yS=yR
+    xS=rakieta.xR
+    yS=rakieta.yR
     for planet in  listaP:
         F = gravity(rakieta.mR, planet.mP, rakieta.xR, rakieta.yR, planet.xP, planet.yP)
         dX=(planet.xP-rakieta.xR)*F/100
         dY=(planet.yP-rakieta.yR)*F/100
-        pygame.draw.line(screen,(0,255,0), (rakieta.xR, rakieta.yR), ((xR+dX), (yR+dY)),3)
-        xS+=dX
-        yS+=dY
+        pygame.draw.line(screen,(0,255,0), (rakieta.xR, rakieta.yR), ((rakieta.xR+dX), (rakieta.yR+dY)),3)
+        xS+=0.001*dX
+        yS+=0.001*dY
+        # de facto xS, yS to są składowe siły wypadkowej podzielone przez 1000
         listaF.append(F)
+
+    #rakieta.xR=xS
+    #rakieta.yR=yS
+
+    # jak policzyć Fwyp ze składowych? (xS, yS)
     Fwyp=distance(rakieta.xR,rakieta.yR,xS,yS)
     a=Fwyp/mR
-    s=a*(czas**2)/2
+    # aX = ? , aY = ?
+    rakieta.vR+=a
+
+    print(rakieta.vR)
+
     pygame.draw.line(screen,(255,255,255), (rakieta.xR, rakieta.yR), (xS,yS) ,5)
-    rakieta.xR=xS
-    rakieta.yR=yS
-    pygame.display.flip()
+
+    pygame.display.flip() 
     pygame.time.wait(czas)
 
 pygame.quit()
-pygame.quit()
-
