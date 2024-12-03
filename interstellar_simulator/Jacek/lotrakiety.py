@@ -1,12 +1,13 @@
 import pygame
 import math
+import random
 
 #dane
 file = open('danerakieta.txt', 'r').readlines()
     
 xR = int(file[0])
 yR = int(file[1])
-vR = int(file[2])
+vxR = int(file[2])
 mR = int(file[3])
 vRangle = int(file[4])
 xP1 = int(file[5])
@@ -21,11 +22,16 @@ mP3 = int(file[13])
 xP4 = int(file[14])
 yP4 = int(file[15])
 mP4 = int(file[16])
+vyR = int(file[17])
+aX = int(file[18])
+aY = int(file[19])
 
 sizeX =1000
 sizeY = 1000
 
 czas=5
+
+color=(255,255,255)
 
 line_color=(255,0,0)
  
@@ -34,19 +40,21 @@ screen = pygame.display.set_mode([sizeX, sizeY])
 
 #funkcje
 class Rakieta:
-    def __init__(self,xR,yR,vR,mR,aR):
+    def __init__(self,xR,yR,vxR,vyR,mR,aX,aY):
         self.xR = xR
         self.yR = yR
-        self.vR = vR
+        self.vxR = vxR
+        self.vyR = vyR
         self.mR = mR
-        self.aR = aR
+        self.aX = aX
+        self.aY = aY
         
     def draw(self,screen,size):
         pygame.draw.circle(screen,(0,0,255),(self.xR,self.yR),size)
 
 def gravity (mR , mP ,xR ,yR ,xP,yP):
     G=10
-    r=distance(xR,yR,xP,yP)
+    r=max(distance(xR,yR,xP,yP),1)
     return G*(mR*mP)/(r**2)
 
 class Planet:
@@ -54,8 +62,10 @@ class Planet:
         self.xP = xP
         self.yP = yP
         self.mP = mP
+
     def draw(self,screen,size):
         pygame.draw.circle(screen,(150,0,200),(self.xP,self.yP),size)
+
     def drawF(self,screen):
         pygame.draw.line(screen,line_color, (rakieta.xR, rakieta.yR), (self.xP, self.yP))
         
@@ -63,13 +73,14 @@ def distance (xR,yR,xP,yP):
         return math.sqrt((xR - xP)**2 + (yR - yP)**2)
 
 
-rakieta = Rakieta(xR, yR, vR, mR, vRangle)
+rakieta = Rakieta(xR, yR, vxR, vyR, mR , aX, aY)
 listaP = [
     Planet(xP1, yP1, mP1),
     Planet(xP2, yP2, mP2),
     Planet(xP3, yP3, mP3),
     Planet(xP4, yP4, mP4)]
 
+#dzialanie
 running = True
  
 while running:
@@ -77,40 +88,40 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.fill((0,0,0))
+    screen.fill(color)
 
     for planet in listaP:
-        planet.draw(screen, size=100)
+        planet.draw(screen, size=20)
         planet.drawF(screen)
-
+    
     rakieta.draw(screen,10)
 
-    listaF=[]
-    xS=rakieta.xR
-    yS=rakieta.yR
+    Fx=0
+    Fy=0
     for planet in  listaP:
         F = gravity(rakieta.mR, planet.mP, rakieta.xR, rakieta.yR, planet.xP, planet.yP)
-        dX=(planet.xP-rakieta.xR)*F/100
-        dY=(planet.yP-rakieta.yR)*F/100
-        pygame.draw.line(screen,(0,255,0), (rakieta.xR, rakieta.yR), ((rakieta.xR+dX), (rakieta.yR+dY)),3)
-        xS+=0.001*dX
-        yS+=0.001*dY
-        # de facto xS, yS to są składowe siły wypadkowej podzielone przez 1000
-        listaF.append(F)
+        dX= planet.xP - rakieta.xR
+        dY= planet.yP - rakieta.yR
+        r = distance(rakieta.xR, rakieta.yR, planet.xP, planet.yP)
+        Fx+=F*dX/100
+        Fy+=F*dY/100
+        pygame.draw.line(screen,(0,255,0), (rakieta.xR, rakieta.yR), ((rakieta.xR+dX/r*50), (rakieta.yR+dY/r*50)),3)
+    
+    rakieta.aX = Fx/mR
+    rakieta.aY = Fy/mR
+    
+    rakieta.vxR += rakieta.aX
+    rakieta.vyR += rakieta.aY
 
-    #rakieta.xR=xS
-    #rakieta.yR=yS
-
-    # jak policzyć Fwyp ze składowych? (xS, yS)
-    Fwyp=distance(rakieta.xR,rakieta.yR,xS,yS)
-    a=Fwyp/mR
-    # aX = ? , aY = ?
-    rakieta.vR+=a
-
-    print(rakieta.vR)
-
-    pygame.draw.line(screen,(255,255,255), (rakieta.xR, rakieta.yR), (xS,yS) ,5)
-
+    rakieta.xR += rakieta.vxR / 100
+    rakieta.yR += rakieta.vyR / 100
+    
+    if rakieta.xR < 0 or rakieta.xR > sizeX or rakieta.yR < 0 or rakieta.yR > sizeY:
+        print("Rakieta wyleciałłła!!!")
+        rakieta.xR=random.randint(0, sizeX)
+        rakieta.yR=random.randint(0, sizeX)
+        color=(random.randint(0, 255),random.randint(0, 255),random.randint(0, 255))
+        
     pygame.display.flip() 
     pygame.time.wait(czas)
 
