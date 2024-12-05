@@ -118,10 +118,22 @@ while running:
     
     if rakieta.xR < 0 or rakieta.xR > sizeX or rakieta.yR < 0 or rakieta.yR > sizeY:
         print("Rakieta wyleciałłła!!!")
-        rakieta.xR=random.randint(0, sizeX)
-        rakieta.yR=random.randint(0, sizeX)
+        rakieta.vxR=0
+        rakieta.vyR=0
         color=(random.randint(0, 255),random.randint(0, 255),random.randint(0, 255))
+
+    if distance(rakieta.xR, rakieta.yR ,xP1 ,yP1)<=20:
+        print("Brawo wylądowałeś!!!!!!EXPLORE Mars1!")
+        rakieta.vxR=0
+        rakieta.vyR=0
+    if distance(rakieta.xR, rakieta.yR ,xP2 ,yP2)<=20:
+        print("Brawo wylądowałeś!!!!!!EXPLORE Saturn2!")
+    if distance(rakieta.xR, rakieta.yR ,xP3 ,yP3)<=20:
+        print("Brawo wylądowałeś!!!!!!EXPLORE Uran3!")
+    if distance(rakieta.xR, rakieta.yR ,xP4 ,yP4)<=20:
+        print("Brawo wylądowałeś!!!!!!EXPLORE Jowisz4!")
         
+
     pygame.display.flip() 
     pygame.time.wait(czas)
 

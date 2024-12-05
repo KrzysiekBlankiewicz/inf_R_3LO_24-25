@@ -2,11 +2,11 @@ import pygame
 import math
 import random
 class Rocket:
-    def __init__(self,rocketx,rockety,velocity,rocketM,rocketA):
+    def __init__(self,rocketx,rockety,velocityx,velocityy,rocketM):
         self.rocketx = rocketx
         self.rockety = rockety
-        self.velocity =velocity
+        self.velocityx = velocityx
+        self.velocityy = velocityy
         self.mass = rocketM
-        self.angle = rocketA
     def draw(self,screen,size):
         pygame.draw.circle(screen,(0,100,0),(self.rocketx,self.rockety),size)
