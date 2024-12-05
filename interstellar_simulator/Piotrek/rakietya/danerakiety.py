@@ -2,12 +2,12 @@ import math
 import pygame
 
 class Rakieta:
-    def __init__(self,velocity,mass,angle,posx,posy):
+    def __init__(self,velocity,mass,posx,posy,angle):
         self.velocity = velocity
         self.mass = mass
-        self.angle = angle
         self.posx = posx
         self.posy = posy
+        self.angle = angle
         self.velocityx = velocity*math.cos(self.angle)
         self.velocityy = velocity*math.sin(self.angle)
 
