@@ -4,12 +4,14 @@ import random
 from rocket import Rocket
 from planet import Planet
 
+
+planet_number = int(input("Podaj liczbe obiektow: "))
+
 sizeX, sizeY = 1000, 1000
 screen = pygame.display.set_mode([sizeX, sizeY])
 pygame.init()
 
 
-planet_number = int(input("Podaj liczbe obiektow: "))
 
 planet_size = 30
 planet_list = []
