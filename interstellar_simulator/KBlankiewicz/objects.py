@@ -27,6 +27,12 @@ class Object:
     def valueFromComponents(self, x, y):
         return math.sqrt(x**2 + y**2)
 
+    def collision(self, other):
+        distance = math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
+        if distance < self.r + other.r:
+            return True
+        return False
+        
 class Planet(Object):
     def __init__(self, m, x, y, color):
         super().__init__(m, x, y, color)
@@ -58,5 +64,12 @@ class Rocket(Object):
         self.x += self.vX
         self.y += self.vY
 
-
-
+    def checkEnd(self, planets):
+        for p in planets:
+            if self.collision(p):
+                return p
+        return None
+    def setInitialVel(self, vX, vY):
+        self.vX = vX
+        self.vY = vY
+        self.velocity = self.valueFromComponents(self.vX, self.vY)
