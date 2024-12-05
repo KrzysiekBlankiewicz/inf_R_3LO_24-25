@@ -5,6 +5,7 @@ from rocket import Rocket
 from planet import Planet
 
 
+
 planet_number = int(input("Podaj liczbe obiektow: "))
 
 sizeX, sizeY = 1000, 1000
@@ -39,7 +40,7 @@ running = True
 rakieta = Rocket(0, 0, 0,0, 100)
 
 clock = pygame.time.Clock()
-
+vel = 0
 while running:
     clock.tick(60)
     wypx = 0
@@ -57,8 +58,15 @@ while running:
         fx, fy = vector(rakieta.mass, planeta.mass, rakieta.rocketx, rakieta.rockety, planeta.planetx, planeta.planety)
         wypx += fx
         wypy += fy
+        if distance(rakieta.rocketx,rakieta.rockety,planeta.planetx,planeta.planety)-10 <= 30:
+            print("Jestem dzbanie na planecie!")
+            rakieta.rocketx =0
+            rakieta.rockety = 0
+            rakieta.velocityx = 0
+            rakieta.velocityy = 0
+        #print("planeta: ",planeta.planetx, planeta.planety,"rakieta: ",rakieta.rocketx,rakieta.rockety)
         pygame.draw.line(screen, (0, 255, 0), (rakieta.rocketx, rakieta.rockety), (rakieta.rocketx+fx, rakieta.rockety+fy), 5)
-    print(wypx,wypy)
+    #print(wypx,wypy)
     ax= wypx/rakieta.mass
     ay = wypy/rakieta.mass
     rakieta.velocityx+=ax/100
