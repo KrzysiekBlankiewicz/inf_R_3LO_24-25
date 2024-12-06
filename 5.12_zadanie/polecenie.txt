@@ -1,0 +1,14 @@
+1. Proszę o napisanie kodu, który odczyta zawartość pliku dane.txt, umieści zawarte tam liczby w tablicy oraz obliczy sumę wszystkich liczb.
+Kod proszę umieścić w pliku Imię_Nazwisko_kod1.py w niniejszym folderze.
+Odpowiedź proszę umieścić w pliku Imię_Nazwisko.txt w niniejszym folderze.
+
+2. Proszę o napisanie kodu, który odczyta liczby zawarte w pliku dane.txt i umieści je w tablicy, ale parami, jak je zapisano w pliku. Tzn. kolejne elementy tablicy niech będą parami liczb. Następnie proszę o wyliczenie sumy każdej pary i wyznaczenie średniej ze wszystkich sum.
+Kod proszę umieścić w pliku Imię_Nazwisko_kod2.py w niniejszym folderze.
+Odpowiedź proszę dopisać do pliku Imię_Nazwisko.txt.
+ 
+3. Proszę o wykonanie zadań 4.1, 4.3, 4.4, 4.2 z poniższego arkusza (matura z czerwca 2017):
+
+https://arkusze.pl/maturalne/informatyka-2017-czerwiec-matura-rozszerzona-2.pdf
+
+Kod proszę umieścić w pliku Imię_Nazwisko_maturalne.py w niniejszym folderze.
+Odpowiedzi proszę dopisać do pliku Imię_Nazwisko.txt.
