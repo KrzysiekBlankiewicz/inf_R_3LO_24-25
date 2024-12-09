@@ -1,4 +1,3 @@
-
 def platformowka(a1,a2,b1,b2):
     if b1 <= a2 and b2 >=a1:
         print("b po prawej")
@@ -16,7 +15,7 @@ def platformowka(a1,a2,b1,b2):
         return abs(a1 - b2)
     return "nie"
 #print(platformowka(5,10,1,8))
-print(platformowka(1, 8, 5, 9))
+print(platformowka(5, 9, 1, 8))
 
 def kucharz(lista):
     lista2 = []
