@@ -15,7 +15,7 @@ def platformowka(a1,a2,b1,b2):
         return abs(a1 - b2)
     return "nie"
 #print(platformowka(5,10,1,8))
-print(platformowka(5, 9, 1, 8))
+#print(platformowka(5, 9, 1, 8))
 
 def kucharz(lista):
     lista2 = []
@@ -26,6 +26,17 @@ def kucharz(lista):
         el2 = lista[x+1]
         lista2.append(el2-el1)
     return lista2
-#print(kucharz([3,1,100,101]))
+print(kucharz([3,1,100,101]))
 
+def bez_kontekstu(lista):
+    lista1= []
+    licznik =0 
+    jakis_belkot = list(lista[2])
+    slowo = list(lista[3])
+    for x in jakis_belkot:
+        if sorted(slowo) == sorted(jakis_belkot[licznik:licznik+8]):
+            lista1.append(licznik+1)
+        licznik+=1
+    return lista1
 
+print(bez_kontekstu([12, 8,"kiercukiiker","cukierki"]))
