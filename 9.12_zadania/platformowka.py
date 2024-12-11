@@ -1,17 +1,11 @@
-import math
-def nachodzenie(a1,a2,b1,b2):
-    if a2<b1:
-        return ("NIE")
-    if b2<a1:
-        return ("NIE")
-    if a1<=b1 and b2<=a2 or b1<=a1 and a2<=b2:
-        n=abs((b2-b1)-(a2-a1))
-        return n
-    if a1 == b2 or b1 == a2:
-        return 0
-    
-print (nachodzenie(11,12,11,20))
+def nachodzenie(a1, a2, b1, b2):
+    if a2 < b1 or b2 < a1: 
+        return "NIE"
+    if a1 == b2 or b1 == a2:  
+        return 0  
+    return min(a2, b2) - max(a1, b1)  
 
+print(nachodzenie(11, 21, 22, 22))
 
 
 def kucharz(lista):
@@ -25,9 +19,12 @@ def kucharz(lista):
 print (kucharz([1,100,101,200]))
 
 
-def anagram(a,b,wyraz,fragment):
-    wyraz=split(wyraz)
-    litery=sort(wyraz)
+def anagram(n, m, wyraz, fragment):
+    szukany_sort = ''.join(sorted(fragment))
+    wynik = [i + 1 for i in range(n - m + 1) if ''.join(sorted(wyraz[i:i + m])) == szukany_sort]
+
+
+print(anagram(12, 8, "kiercukiiker", "cukierki"))
     
 
 
