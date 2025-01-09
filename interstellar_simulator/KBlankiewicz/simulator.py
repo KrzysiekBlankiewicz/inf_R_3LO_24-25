@@ -62,7 +62,12 @@ class Simulator:
         for i in self.planets:
             i.draw()
         self.showForces()
-            
+
+        print(self.rocket)
+        for x in self.planets:
+            print(x)
+        print(self)
+        
         running = True
         while running:
             
@@ -71,7 +76,6 @@ class Simulator:
                     running = False
 
             self.rocket.move(self.planets)
-            print(self.rocket.velocity)
 
             travelEnd = self.rocket.checkEnd(self.planets)
             if travelEnd != None:
