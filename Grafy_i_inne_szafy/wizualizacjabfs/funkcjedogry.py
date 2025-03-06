@@ -35,13 +35,11 @@ class Hex:
         self.s = s
         self.neighbours = []
         
-    def addNeighbour(self, innyhex):
-        if innyhex not in self.neighbours:
-            self.neighbours.append(innyhex)
-            
+    def addNeighbour(self, otherHex):
+        if otherHex not in self.neighbours:
+            self.neighbours.append(otherHex)
 
-
-    def draw(self, a, A, middle, screen):
+    def draw(self, a, A, middle, screen, color=(150, 0, 200)): 
         hexFromCenterPosition = position(self.q, self.r, self.s, A)
         properPosition = topLeftPosition(hexFromCenterPosition, middle)
         verticesList = vertices(properPosition, a)
@@ -52,18 +50,18 @@ class Hex:
         properPosition = topLeftPosition(hexFromCenterPosition, middle)
         return properPosition
     
-    def isNeighbour(self, innyhex):
-        if self.q == innyhex.q and abs(self.r - innyhex.r) == 1 and abs(self.s - innyhex.s) == 1:
+    def isNeighbour(self, otherHex):
+        if self.q == otherHex.q and abs(self.r - otherHex.r) == 1 and abs(self.s - otherHex.s) == 1:
             return 1
-        if self.r == innyhex.r and abs(self.q - innyhex.q) == 1 and abs(self.s - innyhex.s) == 1:
+        if self.r == otherHex.r and abs(self.q - otherHex.q) == 1 and abs(self.s - otherHex.s) == 1:
             return 1
-        if self.s == innyhex.s and abs(self.r - innyhex.r) == 1 and abs(self.q - innyhex.q) == 1:
+        if self.s == otherHex.s and abs(self.r - otherHex.r) == 1 and abs(self.q - otherHex.q) == 1:
             return 1
         return 0
 
-def setNeighbourhood(hexy):
-    for a in hexy:
-        for b in hexy:
+def setNeighbourhood(hexes):
+    for a in hexes:
+        for b in hexes:
             if a.isNeighbour(b) == 1:
                 a.addNeighbour(b)
                 b.addNeighbour(a)
