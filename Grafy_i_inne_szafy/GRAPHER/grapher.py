@@ -1,5 +1,6 @@
 import pygame
 import graphfunkcje as g
+import os
 
 #modes:
 idle = 0
@@ -15,37 +16,39 @@ def mode_change(key):
     if key == pygame.K_3:
         return vertex_end
     return idle
-    
+
 def handle_click(mode, builder, position):
-    x = position[0]
-    y = position[1]
+    x, y = position
     result = False
 
     if mode == idle:
         builder.tempNode = None
-    
     elif mode == node_place:
         builder.tempNode = None
         result = builder.new_node(x, y)
-        
     elif mode == vertex_start:
         v = builder.get_node_at_pos(x, y)
-        if v != None:
+        if v is not None:
             builder.tempNode = v
             result = v.id
-        else:
-            result = False
-            
     elif mode == vertex_end:
         v = builder.get_node_at_pos(x, y)
-        if v != None:
+        if v is not None:
             if builder.new_vertex(v):
                 result = builder.to_string()
-        else:
-            result = False
-            
+    
     return result
-        
+
+def save_graph_to_file(builder, filename="danegraph.txt"):
+    with open(filename, 'w') as f:
+        f.write(builder.to_string())
+
+def load_graph_from_file(builder, filename="danegraph.txt"):
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            data = f.read()
+            builder.from_string(data)
+
 size = 1000
 pygame.init()
 window = pygame.display.set_mode((size, size))
@@ -53,37 +56,27 @@ running = True
 mode = idle
 
 gb = g.GraphBuilder(size)
-
-l=[]
+load_graph_from_file(gb)
 
 while running:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             running = False
-            
         if e.type == pygame.KEYDOWN:
             mode = mode_change(e.key)
-            x="in mode:" + str(mode)
-            l.append(x)
-            print(x)
-            
+            print("in mode:", mode)
         if e.type == pygame.MOUSEBUTTONUP:
             result = handle_click(mode, gb, e.pos)
-            if result != False:
+            if result:
                 print(result)
+                save_graph_to_file(gb)
 
     window.fill((255, 255, 255))
     for n in gb.nodes:
         pygame.draw.circle(window, (0,0,0), (n.x, n.y), gb.node_radius)
         for nn in n.nghb:
-            pygame.draw.line(window, (150,0,255), (n.x, n.y), (nn.x, nn.y),7)
-
-    
-    for i in l:
-        plik = open('danegraph.txt', 'w')
-        plik.write(l[i])
-        plik.close()
+            pygame.draw.line(window, (150,0,255), (n.x, n.y), (nn.x, nn.y), 7)
     
     pygame.display.flip()
-    
+
 pygame.quit()
