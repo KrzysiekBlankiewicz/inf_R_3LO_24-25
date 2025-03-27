@@ -1,0 +1,4 @@
+6.1 15.03.2020
+6.2 09:00
+6.3 wykres w arkuszu fotowoltaika_szymonizbicki.xlsx
+6.4 10
