@@ -1,4 +1,5 @@
 def wstawanie(lista):
+    
     for x in range(1,len(lista)): 
         pom = lista[x]
         xd = x - 1
