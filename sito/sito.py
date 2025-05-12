@@ -19,3 +19,4 @@ def sito(t,n):
 print(sito(lista,100000))
 
 #nie działa mi :c
+#sadge :(
