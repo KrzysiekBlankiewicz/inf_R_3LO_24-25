@@ -1,8 +1,10 @@
 import pygame
+import math
+import random
 
 
 posxs = 500
-posys = 500 
+posys = 500
 listaax = [500]
 listaay = [500]
 
@@ -23,15 +25,24 @@ def methontwo(x,y):
     wyjscie.append(ny)
     return wyjscie
 
-for i in range(1,10000000):
-    posxs = methonone(posxs,posys)[0]
-    posys = methonone(posxs,posys)[1]
-    listaax.append(posxs)
-    listaay.append(posys)
+for i in range(1,100000):
+    opcja = random.randint(1, 2)
+    
+    if opcja == 1:
+        posxs = methonone(posxs,posys)[0]  + 500
+        posys = methonone(posxs,posys)[1]  + 500
+    
+    if opcja == 2:
+        posxs = methontwo(posxs,posys)[0] + 500
+        posys = methontwo(posxs,posys)[1] + 500
+    
+    
+    listaax.append((posxs))
+    listaay.append((posys))
 
 
 
-
+print(listaax,listaay)
 pygame.init()
 screen = pygame.display.set_mode([1000, 1000])
 running = True
@@ -49,3 +60,6 @@ while running:
 
 
 pygame.quit()
+
+
+#chyba wszystko dobrze jest :3
