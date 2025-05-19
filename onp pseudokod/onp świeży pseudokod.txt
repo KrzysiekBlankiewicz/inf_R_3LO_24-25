@@ -1,0 +1,43 @@
+W <- Wyrażenie które dostaliśmy
+L <- Lista
+S <- Stos
+
+funkcja priorytet(znak)
+	jeśli znak to + lub - 
+		zwróć 1
+	jeśli znak to * lub /
+		zwróć 2
+	jeśli znak to ^
+		zwróć 3
+
+Dla każdego elementu x z W wykonuj
+	
+	jeśli x jest znakiem +,-,*, /
+
+		jeśli przed x w stosie nie ma wyższego lub równego priorytetem 
+			to wrzuć na stos
+
+		W przeciwnym wypadku:
+			wrzuć do listy rzeczy ze stosu o większym lub równym priorytecie, aż do napotkania czegoś o mniejszym priorytecie
+			wrzuć x na stos
+
+	w innym przypadku/jeśli x jest '('
+		wrzuć x na sots
+
+
+	w innym przypadku/jeśli x jest ')'
+		wrzucaj rzeczy ze stosu na listę aż natrafisz na '('
+		usuń '(' ze stosu
+
+	w innym przypadku/jeśli x jest Liczbą
+		wrzuć do listy
+
+wrzuć wszystko ze stosu na listę
+wyrzuć listę
+
+
+
+			
+			
+	
+	
