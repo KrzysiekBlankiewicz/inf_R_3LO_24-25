@@ -10,10 +10,10 @@ Dopóki znak c nie jest równy '=' wykonuj:
     		Jeśli c to nawias zamykający ')':
         		Zdejmuj elementy ze stosu i zapisuj je na wyjście,
            		aż zdejmiesz nawias otwierający '(' 
-		Jeśli c to operator (+, -, *, / itd.):
+		Jeśli c to operator:
         		Dopóki stos nie jest pusty i operator na górze stosu
            		ma taki sam lub wyższy priorytet niż c:
              		Zdejmij operator ze stosu i zapisz go na wyjście
-         		Włóż c (czyli ten operator) na stos
+         		Włóż c na stos
    		Czytaj następny znak c
 	Zdejmij wszystkie pozostałe elementy ze stosu i zapisz je na wyjście
