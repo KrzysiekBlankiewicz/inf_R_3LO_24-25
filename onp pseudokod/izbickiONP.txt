@@ -1,0 +1,30 @@
+funkcja priorytet(znak)
+	jeżeli znak = '+' lub znak = '-'
+		zwróć 1
+	jeżeli znak = '*' lub znak = '/'
+		zwróć 2
+	jeżeli znak = '(' lub znak = ')'
+		zwróć 3
+
+zrob stos
+dla i w wyr
+	jeżeli i nie = '='
+		dopóki stos nie pusty
+			wynik dodaj ostatni elem ze stosu
+			wywal ostatni elem ze stosu
+	jeżeli i = '('
+		wrzuć '(' na stos
+	jeżeli i = ')'
+		dopóki góra stosu nie '('
+			wynik dodaj góra stosu
+			wywal ostatni elem ze stosu
+		wywal ostatni elem ze stosu
+		idz na początek pętli
+	jeżeli typ c nie = int
+		dopóki stos nie pusty
+			jeżeli priorytet(i) nie = 3 lub priorytet(i) < priorytet(góra stosu)
+				wynik dodaj góra stosu
+				wywal góre stosu
+			wrzuć i na stos
+	wynik dodaj i
+
