@@ -56,6 +56,17 @@ def end_insert():
         arr.append(1)
     end_insert_end = time.time()
     return end_insert_end - end_insert_start
+
+def index():
+    arr = []
+    for i in range(lenn):
+        arr.append(i)
+    pick = random.choice(arr)
+    index_start = time.time()
+    arr.index(pick)
+    index_end = time.time()
+    return index_end - index_start 
+    
     
 #main
 lenn = int(input("set array len: "))
@@ -66,3 +77,4 @@ print("end pop time (arr.pop(-1) = " + str(end_pop()))
 print("beginning insert time (arr.insert(0, 1)) = " + str(begininng_insert()))
 print("random insert time (arr.insert(random_randint(0,len(arr)-1), 1) = " + str(random_insert()))
 print("end insert time (arr.append(1)) = " + str(end_insert()))
+print("index time (arr.index(pick)) = " + str(index()))
