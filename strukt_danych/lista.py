@@ -47,15 +47,38 @@ class List:
             item = item.next
             id += 1
             
-    def add(s, id_add):
-        pass
+    def add(s, value):
+        new_item = ListItem(value)
+        if s.size == 0:
+            s.first = new_item
+            s.last = new_item
+        else:
+            s.last.next = new_item
+            new_item.before = s.last
+            s.last = new_item
+        s.size += 1
+
     def find(s, value_find):
-        pass
+        item = s.first
+        index = 0
+        while item is not None:
+            if item.value == value_find:
+                return index
+            item = item.next
+            index += 1
+        return -1
+
     def erase(s):
-        pass
+        s.first = None
+        s.last = None
+        s.size = 0
 
 l = List(7)
+l.add(9)
+l.add(9)
+l.add(9)
+l.add(9)
+l.add(9)
 l.print()
 
 g = List()
-g.print()
